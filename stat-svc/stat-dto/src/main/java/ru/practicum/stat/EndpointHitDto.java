@@ -1,18 +1,19 @@
 package ru.practicum.stat;
 
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDateTime;
 
-@Getter
-@Setter
+@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class EndpointHitDto {
-    private Long id;
-    private String app;
-    private String uri;
-    private String ip;
-    private LocalDateTime timestamp;
+    Long id;
+    String app;
+    String uri;
+    String ip;
+    LocalDateTime timestamp;
 }

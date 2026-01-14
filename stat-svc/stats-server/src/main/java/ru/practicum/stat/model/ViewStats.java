@@ -1,14 +1,15 @@
 package ru.practicum.stat.model;
 
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 
-@Setter
-@Getter
+@FieldDefaults(level = AccessLevel.PRIVATE)
+@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class ViewStats {
-    private String app;
-    private String uri;
-    private Long hits;
+    String app;
+    String uri;
+    Long hits;
 }

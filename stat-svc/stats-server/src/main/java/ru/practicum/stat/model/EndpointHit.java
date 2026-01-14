@@ -2,30 +2,27 @@ package ru.practicum.stat.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDateTime;
 
-@Setter
-@Getter
+@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "endpoint")
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class EndpointHit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+    Long id;
     @Column(nullable = false)
-    private String app;
-
+    String app;
     @Column(nullable = false)
-    private String uri;
-
+    String uri;
     @Column(nullable = false)
-    private String ip;
-
+    String ip;
     @Column(name = "created", nullable = false)
-    private LocalDateTime timestamp;
+    LocalDateTime timestamp;
 }
