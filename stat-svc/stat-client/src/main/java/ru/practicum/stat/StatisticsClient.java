@@ -51,10 +51,13 @@ public class StatisticsClient extends BaseClient {
                 .queryParam("end", end.format(formatter))
                 .queryParam("unique", unique);
 
-        if (uris != null && !uris.isEmpty()) {
-            builder.queryParam("uris", String.join(",", uris));
+        if (uris != null) {
+            for (String uri : uris) {
+                builder.queryParam("uris", uri);
+            }
         }
-        String url = builder.toUriString();
+
+        String url = builder.build().toUriString();
         return get(url);
     }
 }
