@@ -11,8 +11,10 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @AllArgsConstructor
 public class LocationDto {
+
     @NotNull
     float lat;
+
     @NotNull
     float lon;
 }

@@ -20,16 +20,22 @@ public class EventSearchParams {
     String text;
     List<Long> categories;
     Boolean paid;
+
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     LocalDateTime rangeStart;
+
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     LocalDateTime rangeEnd;
+
     Boolean onlyAvailable;
     String sort;
+
     @PositiveOrZero
     int from = 0;
+
     @Positive
     int size = 10;
+
     List<Long> users;
     List<EventState> states;
 }

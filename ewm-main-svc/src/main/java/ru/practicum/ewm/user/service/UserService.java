@@ -6,6 +6,7 @@ import ru.practicum.ewm.user.dto.UserDto;
 import java.util.List;
 
 public interface UserService {
+
     UserDto create(NewUserRequest newUserRequest);
 
     void delete(Long id);

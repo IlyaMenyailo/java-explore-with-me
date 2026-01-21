@@ -15,6 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class EventRequestStatusUpdateRequest {
+
     @NotEmpty(message = "Have not requests to update")
     List<Long> requestIds;
 

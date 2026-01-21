@@ -18,6 +18,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "requests")
 public class EventRequest {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
@@ -32,5 +33,6 @@ public class EventRequest {
 
     @Enumerated(EnumType.STRING)
     RequestStatus status;
+
     LocalDateTime created;
 }

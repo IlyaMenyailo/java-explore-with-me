@@ -10,6 +10,7 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @Builder
 public class UserShortDto {
+
     Long id;
     String name;
 }

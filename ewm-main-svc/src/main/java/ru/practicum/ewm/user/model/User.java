@@ -13,6 +13,7 @@ import lombok.experimental.FieldDefaults;
 @Entity
 @Table(name = "users")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;

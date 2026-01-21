@@ -13,6 +13,7 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @Builder
 public class NewUserRequest {
+
     @NotBlank(message = "Поле name не может быть пустым, заполните поле name от 2 до 250 символов!")
     @Size(min = 2, max = 250, message = "Длина name должна составлять от 2 до 250 символов!")
     String name;

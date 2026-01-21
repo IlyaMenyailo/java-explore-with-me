@@ -4,6 +4,7 @@ import ru.practicum.ewm.request.dto.ParticipationRequestDto;
 import ru.practicum.ewm.request.model.EventRequest;
 
 public class EventRequestMapper {
+
     public static ParticipationRequestDto toRequestDto(EventRequest request) {
         if (request == null) {
             return null;

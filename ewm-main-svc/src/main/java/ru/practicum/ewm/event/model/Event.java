@@ -19,6 +19,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "events")
 public class Event {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
@@ -48,8 +49,10 @@ public class Event {
     LocalDateTime eventDate;
 
     Boolean paid;
+
     @Column(name = "participant_limit")
     Integer participantLimit;
+
     @Column(name = "request_moderation")
     Boolean requestModeration;
 

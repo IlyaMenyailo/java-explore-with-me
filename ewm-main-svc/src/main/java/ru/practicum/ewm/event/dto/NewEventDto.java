@@ -17,9 +17,11 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class NewEventDto {
+
     @NotBlank
     @Size(min = 20, max = 2000, message = "Длина аннотации должна не больше 2000 символов и не меньше 20")
     String annotation;
+
     Long category;
 
     @NotBlank
@@ -28,11 +30,13 @@ public class NewEventDto {
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     LocalDateTime eventDate;
+
     LocationDto location;
     Boolean paid = false;
 
     @Min(value = 0, message = "Лимит участников не может быть отрицательным")
     Integer participantLimit = 0;
+
     Boolean requestModeration = true;
 
     @Size(min = 3, max = 120, message = "Длина аннотации должна не больше 120 символов и не меньше 3")

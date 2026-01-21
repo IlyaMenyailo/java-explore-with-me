@@ -21,21 +21,28 @@ public class EventFullDto {
     String title;
     String annotation;
     String description;
+
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     LocalDateTime eventDate;
+
     LocationDto location;
     Boolean paid;
     Integer participantLimit;
     Boolean requestModeration;
     EventState state;
+
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     LocalDateTime createdOn;
+
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     LocalDateTime publishedOn;
+
     UserShortDto initiator;
     CategoryDto category;
+
     @Builder.Default
     long views = 0L;
+
     @Builder.Default
     long confirmedRequests = 0L;
 }
