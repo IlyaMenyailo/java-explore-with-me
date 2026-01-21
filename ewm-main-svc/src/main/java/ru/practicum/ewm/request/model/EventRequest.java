@@ -10,7 +10,8 @@ import ru.practicum.ewm.enums.RequestStatus;
 import java.time.LocalDateTime;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Data
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor

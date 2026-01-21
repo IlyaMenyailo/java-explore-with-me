@@ -8,7 +8,8 @@ import ru.practicum.ewm.enums.RequestStatus;
 
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Builder
 @NoArgsConstructor

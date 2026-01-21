@@ -7,7 +7,8 @@ import ru.practicum.ewm.event.dto.EventShortDto;
 import java.util.List;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder

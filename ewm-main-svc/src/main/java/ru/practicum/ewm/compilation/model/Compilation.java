@@ -8,7 +8,8 @@ import ru.practicum.ewm.event.model.Event;
 import java.util.Set;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder

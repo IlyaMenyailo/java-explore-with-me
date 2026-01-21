@@ -3,7 +3,8 @@ package ru.practicum.ewm.category.dto;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-@Data
+@Getter
+@Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Builder
 @NoArgsConstructor

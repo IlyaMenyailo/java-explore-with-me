@@ -8,7 +8,8 @@ import ru.practicum.ewm.user.dto.UserShortDto;
 
 import java.time.LocalDateTime;
 
-@Data
+@Getter
+@Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Builder
 @NoArgsConstructor
