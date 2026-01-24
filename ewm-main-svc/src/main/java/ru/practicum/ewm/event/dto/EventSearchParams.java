@@ -6,6 +6,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.springframework.format.annotation.DateTimeFormat;
 import ru.practicum.ewm.enums.EventState;
+import ru.practicum.ewm.util.Constants;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -21,10 +22,10 @@ public class EventSearchParams {
     List<Long> categories;
     Boolean paid;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = Constants.DATE_TIME_FORMAT)
     LocalDateTime rangeStart;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = Constants.DATE_TIME_FORMAT)
     LocalDateTime rangeEnd;
 
     Boolean onlyAvailable;

@@ -31,12 +31,12 @@ import ru.practicum.ewm.user.model.User;
 import ru.practicum.ewm.enums.EventState;
 import ru.practicum.ewm.enums.RequestStatus;
 import ru.practicum.ewm.enums.AdminStateAction;
+import ru.practicum.ewm.util.Constants;
 import ru.practicum.stat.StatisticsClient;
 import ru.practicum.stat.ViewStatsDto;
 import org.springframework.data.jpa.domain.Specification;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -49,7 +49,6 @@ import jakarta.persistence.criteria.Predicate;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class EventServiceImpl implements EventService {
 
-    static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     static int MIN_HOURS_BEFORE_EVENT = 2;
     static int MIN_HOURS_BEFORE_PUBLISH = 1;
 
@@ -291,8 +290,8 @@ public class EventServiceImpl implements EventService {
     private void validateEventDate(LocalDateTime eventDate) {
         LocalDateTime nowPlusMinHours = LocalDateTime.now().plusHours(MIN_HOURS_BEFORE_EVENT);
         if (eventDate.isBefore(nowPlusMinHours)) {
-            String formattedEventDate = eventDate.format(formatter);
-            String formattedMinHours = nowPlusMinHours.format(formatter);
+            String formattedEventDate = eventDate.format(Constants.DATE_TIME_FORMATTER);
+            String formattedMinHours = nowPlusMinHours.format(Constants.DATE_TIME_FORMATTER);
 
             throw new ValidationException("Дата мероприятия должна быть не ранее, чем через " + MIN_HOURS_BEFORE_EVENT + " часа(ов) от текущего момента. " +
                     "Указанная дата: " + formattedEventDate + ", Минимальная допустимая дата: " + formattedMinHours);

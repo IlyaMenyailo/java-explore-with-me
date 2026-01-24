@@ -6,6 +6,7 @@ import jakarta.validation.constraints.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import ru.practicum.ewm.location.dto.LocationDto;
+import ru.practicum.ewm.util.Constants;
 
 import java.time.LocalDateTime;
 
@@ -28,13 +29,11 @@ public class NewEventDto {
     @Size(min = 20, max = 7000, message = "Длина описания должна не больше 7000 символов и не меньше 20")
     String description;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = Constants.DATE_TIME_FORMAT)
     @NotNull(message = "Дата события не может быть null")
-    @Future(message = "Дата события должна быть в будущем")
     LocalDateTime eventDate;
 
     @NotNull(message = "Локация не может быть null")
-    @Valid
     LocationDto location;
 
     Boolean paid = false;

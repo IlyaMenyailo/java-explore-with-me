@@ -7,6 +7,7 @@ import ru.practicum.ewm.category.dto.CategoryDto;
 import ru.practicum.ewm.location.dto.LocationDto;
 import ru.practicum.ewm.user.dto.UserShortDto;
 import ru.practicum.ewm.enums.EventState;
+import ru.practicum.ewm.util.Constants;
 
 import java.time.LocalDateTime;
 
@@ -22,7 +23,7 @@ public class EventFullDto {
     String annotation;
     String description;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = Constants.DATE_TIME_FORMAT)
     LocalDateTime eventDate;
 
     LocationDto location;
@@ -31,10 +32,10 @@ public class EventFullDto {
     Boolean requestModeration;
     EventState state;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = Constants.DATE_TIME_FORMAT)
     LocalDateTime createdOn;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = Constants.DATE_TIME_FORMAT)
     LocalDateTime publishedOn;
 
     UserShortDto initiator;

@@ -7,6 +7,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 import ru.practicum.ewm.enums.UserStateAction;
 import ru.practicum.ewm.location.dto.LocationDto;
+import ru.practicum.ewm.util.Constants;
 
 import java.time.LocalDateTime;
 
@@ -26,7 +27,7 @@ public class UpdateEventUserRequest {
     @Size(min = 20, max = 7000, message = "Длина описания должна не больше 7000 символов и не меньше 20")
     String description;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = Constants.DATE_TIME_FORMAT)
     LocalDateTime eventDate;
 
     LocationDto location;

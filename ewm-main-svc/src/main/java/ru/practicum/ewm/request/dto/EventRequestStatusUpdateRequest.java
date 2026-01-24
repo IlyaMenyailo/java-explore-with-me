@@ -1,7 +1,7 @@
 package ru.practicum.ewm.request.dto;
 
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import ru.practicum.ewm.enums.RequestStatus;
@@ -19,6 +19,6 @@ public class EventRequestStatusUpdateRequest {
     @NotEmpty(message = "Have not requests to update")
     List<Long> requestIds;
 
-    @NotBlank(message = "Have not new status for requests to update")
+    @NotNull(message = "Have not new status for requests to update")
     RequestStatus status;
 }
