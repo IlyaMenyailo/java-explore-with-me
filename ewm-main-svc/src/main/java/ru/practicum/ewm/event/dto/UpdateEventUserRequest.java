@@ -5,8 +5,8 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import ru.practicum.ewm.enums.StateAction;
-import ru.practicum.ewm.location.model.Location;
+import ru.practicum.ewm.enums.UserStateAction;
+import ru.practicum.ewm.location.dto.LocationDto;
 import ru.practicum.ewm.util.Constants;
 
 import java.time.LocalDateTime;
@@ -30,14 +30,14 @@ public class UpdateEventUserRequest {
     @JsonFormat(pattern = Constants.DATE_TIME_FORMAT)
     LocalDateTime eventDate;
 
-    Location location;
+    LocationDto location;
     Boolean paid;
 
     @Min(value = 0, message = "Лимит участников не может быть отрицательным")
     Integer participantLimit;
 
     Boolean requestModeration;
-    StateAction stateAction;
+    UserStateAction stateAction;
 
     @Size(min = 3, max = 120, message = "Длина аннотации должна не больше 120 символов и не меньше 3")
     String title;

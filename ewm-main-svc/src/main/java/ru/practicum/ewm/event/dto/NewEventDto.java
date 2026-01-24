@@ -21,6 +21,7 @@ public class NewEventDto {
     @Size(min = 20, max = 2000, message = "Длина аннотации должна не больше 2000 символов и не меньше 20")
     String annotation;
 
+    @NotNull(message = "Категория не может быть null")
     Long category;
 
     @NotBlank
@@ -28,8 +29,10 @@ public class NewEventDto {
     String description;
 
     @JsonFormat(pattern = Constants.DATE_TIME_FORMAT)
+    @NotNull(message = "Дата события не может быть null")
     LocalDateTime eventDate;
 
+    @NotNull(message = "Локация не может быть null")
     LocationDto location;
 
     Boolean paid = false;
@@ -40,5 +43,6 @@ public class NewEventDto {
     Boolean requestModeration = true;
 
     @Size(min = 3, max = 120, message = "Длина аннотации должна не больше 120 символов и не меньше 3")
+    @NotBlank
     String title;
 }
