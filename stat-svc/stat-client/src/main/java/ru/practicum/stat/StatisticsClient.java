@@ -62,4 +62,14 @@ public class StatisticsClient extends BaseClient {
 
         return get(url);
     }
+
+    public ResponseEntity<Object> createHit(String uri, String ip) {
+        EndpointHitCreateDto endpointHitCreateDto = EndpointHitCreateDto.builder()
+                .app(appName)
+                .uri(uri)
+                .ip(ip)
+                .timestamp(LocalDateTime.now())
+                .build();
+        return post(endpointHitCreateDto);
+    }
 }
