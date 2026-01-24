@@ -6,7 +6,7 @@ import jakarta.validation.constraints.Size;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import ru.practicum.ewm.enums.UserStateAction;
-import ru.practicum.ewm.location.dto.LocationDto;
+import ru.practicum.ewm.location.model.Location;
 import ru.practicum.ewm.util.Constants;
 
 import java.time.LocalDateTime;
@@ -30,7 +30,7 @@ public class UpdateEventUserRequest {
     @JsonFormat(pattern = Constants.DATE_TIME_FORMAT)
     LocalDateTime eventDate;
 
-    LocationDto location;
+    Location location;
     Boolean paid;
 
     @Min(value = 0, message = "Лимит участников не может быть отрицательным")
