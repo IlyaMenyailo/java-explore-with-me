@@ -5,7 +5,7 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import ru.practicum.ewm.enums.AdminStateAction;
+import ru.practicum.ewm.enums.StateAction;
 import ru.practicum.ewm.location.model.Location;
 import ru.practicum.ewm.util.Constants;
 
@@ -37,7 +37,7 @@ public class UpdateEventAdminRequest {
     Integer participantLimit;
 
     Boolean requestModeration;
-    AdminStateAction stateAction;
+    StateAction stateAction;
 
     @Size(min = 3, max = 120, message = "Длина аннотации должна не больше 120 символов и не меньше 3")
     String title;
