@@ -38,9 +38,9 @@ public class CompilationAdminController {
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
-        log.info("DELETE запрос на удаление подборки событий с id={} - ADMIN", id);
-        compilationService.delete(id); // Удаляем подборку
-        log.info("Подборка событий с id={} удалена", id);
+    public void delete(@PathVariable Long compId) {
+        log.info("DELETE запрос на удаление подборки событий с id={} - ADMIN", compId);
+        compilationService.delete(compId);
+        log.info("Подборка событий с id={} удалена", compId);
     }
 }
