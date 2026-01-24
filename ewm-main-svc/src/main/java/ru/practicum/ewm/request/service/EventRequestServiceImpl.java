@@ -8,7 +8,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.ewm.event.repository.EventRepository;
 import ru.practicum.ewm.event.model.Event;
-import ru.practicum.ewm.exception.*;
+import ru.practicum.ewm.exception.ConflictException;
+import ru.practicum.ewm.exception.DuplicatedDataException;
+import ru.practicum.ewm.exception.ForbiddenException;
+import ru.practicum.ewm.exception.NotFoundException;
 import ru.practicum.ewm.request.repository.EventRequestRepository;
 import ru.practicum.ewm.request.dto.EventRequestStatusUpdateRequest;
 import ru.practicum.ewm.request.dto.EventRequestStatusUpdateResult;
@@ -39,11 +42,6 @@ public class EventRequestServiceImpl implements EventRequestService {
     @Override
     public ParticipationRequestDto create(Long userId, Long eventId) {
         log.info("Создание запроса на участие: userId = {}, eventId = {}", userId, eventId);
-
-        if (eventId == null) {
-            throw new ValidationException("eventId не может быть null");
-        }
-
 
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException("Пользователь c ID " + userId + " не найден"));
