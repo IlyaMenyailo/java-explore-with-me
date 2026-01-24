@@ -13,7 +13,6 @@ import java.util.Set;
 @NoArgsConstructor
 @Builder
 public class UpdateCompilationRequest {
-    Long id;
     Set<Long> events;
     Boolean pinned;
 

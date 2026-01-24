@@ -1,9 +1,8 @@
 package ru.practicum.ewm.event.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import ru.practicum.ewm.location.dto.LocationDto;
@@ -22,6 +21,7 @@ public class NewEventDto {
     @Size(min = 20, max = 2000, message = "Длина аннотации должна не больше 2000 символов и не меньше 20")
     String annotation;
 
+    @NotNull(message = "Категория не может быть null")
     Long category;
 
     @NotBlank
@@ -29,9 +29,14 @@ public class NewEventDto {
     String description;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @NotNull(message = "Дата события не может быть null")
+    @Future(message = "Дата события должна быть в будущем")
     LocalDateTime eventDate;
 
+    @NotNull(message = "Локация не может быть null")
+    @Valid
     LocationDto location;
+
     Boolean paid = false;
 
     @Min(value = 0, message = "Лимит участников не может быть отрицательным")
@@ -40,5 +45,6 @@ public class NewEventDto {
     Boolean requestModeration = true;
 
     @Size(min = 3, max = 120, message = "Длина аннотации должна не больше 120 символов и не меньше 3")
+    @NotBlank
     String title;
 }

@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.ewm.category.repository.CategoryRepository;
 import ru.practicum.ewm.category.mapper.CategoryMapper;
 import ru.practicum.ewm.category.model.Category;
+import ru.practicum.ewm.enums.UserStateAction;
 import ru.practicum.ewm.event.repository.EventRepository;
 import ru.practicum.ewm.event.dto.*;
 import ru.practicum.ewm.event.mapper.EventMapper;
@@ -29,7 +30,7 @@ import ru.practicum.ewm.user.mapper.UserMapper;
 import ru.practicum.ewm.user.model.User;
 import ru.practicum.ewm.enums.EventState;
 import ru.practicum.ewm.enums.RequestStatus;
-import ru.practicum.ewm.enums.StateAction;
+import ru.practicum.ewm.enums.AdminStateAction;
 import ru.practicum.stat.StatisticsClient;
 import ru.practicum.stat.ViewStatsDto;
 import org.springframework.data.jpa.domain.Specification;
@@ -121,7 +122,7 @@ public class EventServiceImpl implements EventService {
                 Optional.ofNullable(eventUserRequest.getRequestModeration()), Optional.ofNullable(eventUserRequest.getTitle()),
                 eventUserRequest.getCategory());
 
-        processStateAction(event, eventUserRequest.getStateAction());
+        processUserStateAction(event, eventUserRequest.getStateAction());
 
         Event updatedEvent = eventRepository.save(event);
         return EventMapper.toEventFullDto(updatedEvent);
@@ -298,24 +299,24 @@ public class EventServiceImpl implements EventService {
         }
     }
 
-    private void validateEventDateForAdmin(LocalDateTime eventDate, StateAction stateAction) {
+    private void validateEventDateForAdmin(LocalDateTime eventDate, AdminStateAction stateAction) {
         if (eventDate.isBefore(LocalDateTime.now().plusHours(MIN_HOURS_BEFORE_EVENT))) {
             throw new ValidationException("Дата мероприятия должна быть на " + MIN_HOURS_BEFORE_EVENT + "часа раньше текущего момента");
         }
-        if (stateAction != null && stateAction.equals(StateAction.PUBLISH_EVENT) && eventDate.isBefore(LocalDateTime.now().plusHours(MIN_HOURS_BEFORE_PUBLISH))) {
+        if (stateAction != null && stateAction.equals(AdminStateAction.PUBLISH_EVENT) && eventDate.isBefore(LocalDateTime.now().plusHours(MIN_HOURS_BEFORE_PUBLISH))) {
             throw new ValidationException("Дата события должна быть на " + MIN_HOURS_BEFORE_PUBLISH + " час раньше момента публикации");
         }
     }
 
-    private void validateStatusForAdmin(EventState state, StateAction stateAction) {
-        if (stateAction != null && !stateAction.equals(StateAction.REJECT_EVENT) && !stateAction.equals(StateAction.PUBLISH_EVENT)) {
+    private void validateStatusForAdmin(EventState state, AdminStateAction stateAction) {
+        if (stateAction != null && !stateAction.equals(AdminStateAction.REJECT_EVENT) && !stateAction.equals(AdminStateAction.PUBLISH_EVENT)) {
             throw new ForbiddenException("Неизвестный state action");
         }
-        if (!state.equals(EventState.PENDING) && stateAction.equals(StateAction.PUBLISH_EVENT)) {
+        if (!state.equals(EventState.PENDING) && stateAction.equals(AdminStateAction.PUBLISH_EVENT)) {
             throw new ConflictException("\n" +
                     "Не удается опубликовать незавершенное событие");
         }
-        if (state.equals(EventState.PUBLISHED) && stateAction.equals(StateAction.REJECT_EVENT)) {
+        if (state.equals(EventState.PUBLISHED) && stateAction.equals(AdminStateAction.REJECT_EVENT)) {
             throw new ConflictException("Невозможно отклонить уже опубликованное событие");
         }
     }
@@ -355,7 +356,7 @@ public class EventServiceImpl implements EventService {
         }
     }
 
-    private void processStateAction(Event event, StateAction stateAction) {
+    private void processStateAction(Event event, AdminStateAction stateAction) {
         if (stateAction != null) {
             switch (stateAction) {
                 case PUBLISH_EVENT:
@@ -363,6 +364,21 @@ public class EventServiceImpl implements EventService {
                     event.setPublishedOn(LocalDateTime.now());
                     break;
                 case REJECT_EVENT:
+                case CANCEL_REVIEW:
+                    event.setState(EventState.CANCELED);
+                    break;
+                case SEND_TO_REVIEW:
+                    event.setState(EventState.PENDING);
+                    break;
+                default:
+                    throw new IllegalArgumentException("Недопустимое действие над событием: " + stateAction);
+            }
+        }
+    }
+
+    private void processUserStateAction(Event event, UserStateAction stateAction) {
+        if (stateAction != null) {
+            switch (stateAction) {
                 case CANCEL_REVIEW:
                     event.setState(EventState.CANCELED);
                     break;
