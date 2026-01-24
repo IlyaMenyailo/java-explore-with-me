@@ -76,6 +76,11 @@ public class CompilationServiceImpl implements CompilationService {
 
     @Override
     public void delete(Long id) {
+
+        if (!compilationRepository.existsById(id)) {
+            throw new NotFoundException("Подборка с ID " + id + " не найдена");
+        }
+
         compilationRepository.deleteById(id);
         log.info("Подборка удалена");
     }
