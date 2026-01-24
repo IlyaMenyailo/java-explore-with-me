@@ -17,6 +17,7 @@ import ru.practicum.ewm.event.repository.EventRepository;
 import ru.practicum.ewm.event.dto.EventShortDto;
 import ru.practicum.ewm.event.mapper.EventMapper;
 import ru.practicum.ewm.event.model.Event;
+import ru.practicum.ewm.exception.ConflictException;
 import ru.practicum.ewm.exception.NotFoundException;
 
 import java.util.*;
@@ -81,8 +82,13 @@ public class CompilationServiceImpl implements CompilationService {
             throw new NotFoundException("Подборка с ID " + id + " не найдена");
         }
 
-        compilationRepository.deleteById(id);
-        log.info("Подборка удалена");
+        try {
+            compilationRepository.deleteById(id);
+            log.info("Подборка с ID {} удалена", id);
+        } catch (Exception exception) {
+            log.error("Ошибка при удалении подборки с id={}: {}", id, exception.getMessage());
+            throw new ConflictException("Не удалось удалить подборку с id=" + id);
+        }
     }
 
     @Transactional(readOnly = true)
