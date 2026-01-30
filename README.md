@@ -54,7 +54,7 @@
 * События (/admin/events)
   * GET /admin/events — поиск событий с фильтрами (для модерации)
   * PATCH /admin/events/{eventId} — публикация/отклонение события
-  * Подборки (/admin/compilations)
+* Подборки (/admin/compilations)
   * POST /admin/compilations — создание новой подборки событий
   * PATCH /admin/compilations/{compId} — обновление подборки
   * DELETE /admin/compilations/{compId} — удаление подборки
